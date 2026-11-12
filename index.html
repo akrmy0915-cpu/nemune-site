@@ -129,11 +129,27 @@ body{background:#070b1a;color:#cbd5e1;font-family:'Vazirmatn',Tahoma,sans-serif;
 
 <!-- ===== 7. TESTIMONIALS ===== -->
 <section id="reviews" class="py-24">
- <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+ <div class="max-w-2xl mx-auto px-4 sm:px-6 text-center">
   <h2 class="text-3xl sm:text-4xl font-extrabold text-white rv">نظرات مشتریان</h2>
-  <div class="relative mt-12 h-[360px] sm:h-[300px] rv" id="slider" aria-live="polite"></div>
-  <div class="flex justify-center gap-2 mt-6" id="dots"></div>
-  <div class="flex flex-wrap justify-center gap-x-10 gap-y-3 mt-12 text-slate-500 font-bold text-lg" id="logos"></div>
+  <p class="mt-4 text-slate-400 leading-8 rv">نظر خود را برای ما بنویسید.</p>
+  <form id="rf" name="reviews" method="POST" data-netlify="true" netlify-honeypot="bot" class="glass rounded-3xl p-6 sm:p-10 mt-10 text-right space-y-5 rv">
+   <input type="hidden" name="form-name" value="reviews">
+   <p class="hidden"><label>Bot <input name="bot"></label></p>
+   <div><div class="text-sm text-slate-300 mb-2">امتیاز شما</div>
+    <div id="rate" class="flex gap-1" dir="ltr" role="group" aria-label="امتیاز">
+     <button type="button" data-v="1" aria-label="۱ ستاره" class="text-3xl leading-none text-slate-600 transition hover:scale-110">★</button>
+     <button type="button" data-v="2" aria-label="۲ ستاره" class="text-3xl leading-none text-slate-600 transition hover:scale-110">★</button>
+     <button type="button" data-v="3" aria-label="۳ ستاره" class="text-3xl leading-none text-slate-600 transition hover:scale-110">★</button>
+     <button type="button" data-v="4" aria-label="۴ ستاره" class="text-3xl leading-none text-slate-600 transition hover:scale-110">★</button>
+     <button type="button" data-v="5" aria-label="۵ ستاره" class="text-3xl leading-none text-slate-600 transition hover:scale-110">★</button></div>
+    <input type="hidden" name="rating" id="rating" value="5"></div>
+   <div><label for="rn" class="block text-sm text-slate-300 mb-2">نام (اختیاری)</label>
+    <input id="rn" name="name" class="w-full glass rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-400"></div>
+   <div><label for="rt" class="block text-sm text-slate-300 mb-2">نظر شما</label>
+    <textarea id="rt" name="message" required rows="5" class="w-full glass rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-400 resize-none"></textarea></div>
+   <button class="glow rounded-full px-8 py-3 font-bold text-white inline-flex items-center gap-2"><i data-lucide="send" class="w-4 h-4"></i>ارسال نظر</button>
+   <p id="rm" class="text-sm text-mint min-h-5" aria-live="polite"></p>
+  </form>
  </div>
 </section>
 
@@ -197,28 +213,23 @@ const SVC=[['code-2','توسعه نرم‌افزار','نرم‌افزار سا�
  ['lightbulb','مشاوره فناوری','استراتژی','نقشه راه فناوری، ارزیابی ریسک و انتخاب معماری درست.'],
  ['palette','طراحی تجربه کاربری','طراحی','پژوهش کاربر، طراحی رابط و سیستم طراحی برای محصولات شما.'],
  ['lock-keyhole','امنیت سایبری','امنیت','تست نفوذ، پایش مستمر و پیاده‌سازی استانداردهای امنیتی.']];
-const PF=[['web','پلتفرم مدیریت لجستیک','گروه صنعتی پارس','1551434678-e076c223a692','وب‌اپلیکیشن'],
- ['mobile','اپلیکیشن بانکداری همراه','بانک آریا','1511707171634-5f897ff02aa9','موبایل'],
- ['cloud','مهاجرت به زیرساخت ابری','تجارت الکترونیک نوا','1451187580459-43490279c0fa','ابری'],
- ['mkt','کمپین رشد دیجیتال','فروشگاه‌های زنجیره‌ای ایران‌مال','1460925895917-afdab827c52f','بازاریابی'],
- ['web','سامانه منابع انسانی','هلدینگ سپهر','1504384308090-c894fdcc538d','وب‌اپلیکیشن'],
- ['cloud','داشبورد تحلیل داده','شرکت انرژی پایدار','1518770660439-4636190af475','ابری']];
+const PF=[['web','پلتفرم مدیریت لجستیک','حوزه صنعت و لجستیک','1551434678-e076c223a692','وب‌اپلیکیشن'],
+ ['mobile','اپلیکیشن بانکداری همراه','حوزه بانکداری','1511707171634-5f897ff02aa9','موبایل'],
+ ['cloud','مهاجرت به زیرساخت ابری','حوزه تجارت الکترونیک','1451187580459-43490279c0fa','ابری'],
+ ['mkt','کمپین رشد دیجیتال','حوزه خرده‌فروشی','1460925895917-afdab827c52f','بازاریابی'],
+ ['web','سامانه منابع انسانی','حوزه منابع انسانی','1504384308090-c894fdcc538d','وب‌اپلیکیشن'],
+ ['cloud','داشبورد تحلیل داده','حوزه انرژی','1518770660439-4636190af475','ابری']];
 const FILTERS=[['all','همه'],['web','وب‌اپلیکیشن'],['mobile','موبایل'],['cloud','ابری'],['mkt','بازاریابی']];
 const FEAT=[['shield-check','امنیت تضمین‌شده','رمزنگاری، پشتیبان‌گیری روزانه و قرارداد محرمانگی.'],
  ['headset','پشتیبانی ۲۴/۷','تیم پشتیبانی همیشه در دسترس با زمان پاسخ زیر ۱۵ دقیقه.'],
  ['users','تیم متخصص','مهندسان ارشد با میانگین ۸ سال سابقه حرفه‌ای.'],
  ['timer','تحویل به‌موقع','تحویل مرحله‌ای با گزارش هفتگی و شفافیت کامل.']];
 const CMP=[['قیمت و زمان شفاف',1,0],['پشتیبانی بعد از تحویل',1,0],['مالکیت کامل کد منبع',1,0],['گزارش پیشرفت هفتگی',1,0]];
-const REV=[['«بازطراحی سامانه لجستیک ما با این تیم زمان پردازش سفارش‌ها را نصف کرد. ارتباط تیم‌شان بی‌نظیر بود.»','مهدی رضایی','مدیر فناوری، گروه صنعتی پارس',5],
- ['«مهاجرت به فضای ابری بدون حتی یک ساعت توقف انجام شد و هزینه‌های زیرساخت ۳۰٪ کاهش یافت.»','سارا کریمی','مدیرعامل، تجارت الکترونیک نوا',5],
- ['«اپلیکیشن جدید در سه ماه اول، رضایت کاربران را به‌شکل محسوسی بالا برد. حرفه‌ای و دقیق.»','امیر حسینی','مدیر محصول، بانک آریا',5]];
-const LOGOS=['گروه پارس','بانک آریا','نوا','ایران‌مال','هلدینگ سپهر','انرژی پایدار'];
 const POSTS=[['راهنمای مهاجرت به فضای ابری بدون توقف سرویس','رایانش ابری','۱۲ آبان ۱۴۰۵','۷ دقیقه','1531297484001-80022131f5a1'],
  ['پنج اشتباه رایج در طراحی نرم‌افزار سازمانی','توسعه نرم‌افزار','۵ آبان ۱۴۰۵','۵ دقیقه','1551434678-e076c223a692'],
  ['چطور امنیت سامانه‌های سازمانی را ارزیابی کنیم؟','امنیت سایبری','۲۸ مهر ۱۴۰۵','۹ دقیقه','1550751827-4bd374c3f58b']];
 const FL=['درباره ما|about','خدمات|services','نمونه کارها|portfolio','وبلاگ|blog','تماس|contact'];
 const $=s=>document.querySelector(s), fa=n=>n.toLocaleString('fa-IR');
-const stars=n=>'<i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>'.repeat(n);
 
 /* ---------- Render ---------- */
 const link=(h,t,c)=>`<a href="#${h}" class="${c}">${t}</a>`;
@@ -231,9 +242,6 @@ $('#filters').innerHTML=FILTERS.map(([k,t],i)=>`<button role="tab" data-f="${k}"
 $('#pf').innerHTML=PF.map(([c,t,cl,img,tag])=>`<article class="pf group relative rounded-3xl overflow-hidden zoom aspect-[4/3] border border-white/10 bg-gradient-to-br from-indigo-900 to-slate-900" data-c="${c}"><img data-u="${img}" alt="تصویر پروژه ${t}"><div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent"></div><span class="absolute top-4 right-4 glass rounded-full px-3 py-1 text-xs text-white">${tag}</span><div class="absolute inset-x-0 bottom-0 p-6 transition-transform duration-500 translate-y-8 group-hover:translate-y-0"><h3 class="text-lg font-bold text-white">${t}</h3><p class="text-sm text-slate-300 mt-1">${cl}</p><span class="mt-3 inline-flex items-center gap-1.5 text-sm text-mint opacity-0 group-hover:opacity-100 transition-opacity duration-500">مشاهده جزئیات پروژه<i data-lucide="arrow-up-left" class="w-4 h-4"></i></span></div></article>`).join('');
 $('#feat').innerHTML=FEAT.map(([i,t,d])=>`<div class="glass card-h rounded-2xl p-5"><i data-lucide="${i}" class="text-mint"></i><h3 class="font-bold text-white mt-3">${t}</h3><p class="mt-2 text-sm leading-7 text-slate-400">${d}</p></div>`).join('');
 $('#cmp').innerHTML=`<div class="grid grid-cols-[1fr_auto_auto] gap-x-6 px-5 py-3 bg-white/5 text-white font-bold"><span>مقایسه</span><span class="w-16 text-center text-mint">ما</span><span class="w-16 text-center text-slate-500">رایج</span></div>`+CMP.map(([t,a,b])=>`<div class="grid grid-cols-[1fr_auto_auto] gap-x-6 px-5 py-3 border-t border-white/5 items-center"><span>${t}</span><i data-lucide="check-circle-2" class="w-5 h-5 text-mint mx-auto"></i><i data-lucide="x-circle" class="w-5 h-5 text-slate-600 mx-auto"></i></div>`).join('');
-$('#slider').innerHTML=REV.map(([q,n,r,s],i)=>`<figure class="slide ${i?'':'on'} glass rounded-3xl p-8 sm:p-12 flex flex-col items-center justify-center"><div class="flex gap-1">${stars(s)}</div><blockquote class="mt-6 text-lg sm:text-xl leading-9 text-slate-200">${q}</blockquote><figcaption class="mt-6"><div class="font-bold text-white">${n}</div><div class="text-sm text-slate-400">${r}</div></figcaption></figure>`).join('');
-$('#dots').innerHTML=REV.map((_,i)=>`<button class="dot h-2.5 rounded-full transition-all ${i?'w-2.5 bg-white/25':'w-8 bg-mint'}" aria-label="نظر ${fa(i+1)}"></button>`).join('');
-$('#logos').innerHTML=LOGOS.map(l=>`<span class="hover:text-slate-300 transition">${l}</span>`).join('');
 $('#posts').innerHTML=POSTS.map(([t,c,d,r,img],k)=>`<article class="group glass card-h rounded-3xl overflow-hidden rv" style="transition-delay:${k*100}ms"><div class="zoom aspect-[16/10] bg-gradient-to-br from-indigo-900 to-slate-900"><img data-u="${img}" alt="تصویر مقاله ${t}"></div><div class="p-6"><span class="text-xs rounded-full px-3 py-1 bg-emerald-500/15 text-mint">${c}</span><h3 class="text-lg font-bold text-white mt-4 leading-8 group-hover:text-indigo-300 transition-colors">${t}</h3><div class="mt-4 flex items-center gap-4 text-xs text-slate-500"><span class="flex items-center gap-1.5"><i data-lucide="calendar" class="w-3.5 h-3.5"></i>${d}</span><span class="flex items-center gap-1.5"><i data-lucide="clock" class="w-3.5 h-3.5"></i>${r} مطالعه</span></div></div></article>`).join('');
 $('#fl').innerHTML=FL.map(x=>{const[t,h]=x.split('|');return `<li>${link(h,t,'text-slate-400 hover:text-white transition')}</li>`}).join('');
 $('#soc').innerHTML=['linkedin','instagram','twitter','github'].map(s=>`<a href="#" aria-label="${s}" class="glass w-10 h-10 rounded-full grid place-items-center text-slate-300 hover:text-white hover:bg-indigo-500/30 transition"><i data-lucide="${s}" class="w-4 h-4"></i></a>`).join('');
@@ -258,11 +266,14 @@ $('#filters').onclick=e=>{const b=e.target.closest('.f');if(!b)return;
  document.querySelectorAll('.f').forEach(x=>x.className='f rounded-full px-4 py-2 text-sm transition glass text-slate-300 hover:text-white');
  b.className='f rounded-full px-4 py-2 text-sm transition glow text-white';
  document.querySelectorAll('.pf').forEach(c=>c.classList.toggle('hide',b.dataset.f!=='all'&&c.dataset.c!==b.dataset.f))};
-// Testimonials slider (auto-advance, dots)
-let cur=0,tm;const sl=[...document.querySelectorAll('.slide')],dt=[...document.querySelectorAll('.dot')];
-function go(i){cur=(i+sl.length)%sl.length;sl.forEach((s,k)=>s.classList.toggle('on',k===cur));
- dt.forEach((d,k)=>d.className='dot h-2.5 rounded-full transition-all '+(k===cur?'w-8 bg-mint':'w-2.5 bg-white/25'))}
-const auto=()=>{clearInterval(tm);tm=setInterval(()=>go(cur+1),6000)};dt.forEach((d,k)=>d.onclick=()=>{go(k);auto()});auto();
+// Review form: star rating + submit (Netlify Forms); other reviews are never shown
+const rb=[...document.querySelectorAll('#rate button')];
+function setRate(v){$('#rating').value=v;rb.forEach(b=>{const on=+b.dataset.v<=v;b.classList.toggle('text-amber-400',on);b.classList.toggle('text-slate-600',!on)})}
+rb.forEach(b=>b.onclick=()=>setRate(+b.dataset.v));setRate(5);
+$('#rf').onsubmit=async e=>{e.preventDefault();const f=e.target,m=$('#rm');m.className='text-sm text-mint min-h-5';m.textContent='در حال ارسال…';
+ try{const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(f)).toString()});
+  if(!r.ok)throw 0;f.reset();setRate(5);m.textContent='نظر شما ثبت شد. سپاسگزاریم!'}
+ catch{m.className='text-sm text-red-400 min-h-5';m.textContent='ارسال انجام نشد. لطفاً دوباره تلاش کنید.'}};
 // Newsletter (demo only)
 $('#nl').onsubmit=e=>{e.preventDefault();$('#nlm').textContent='عضویت شما ثبت شد. سپاسگزاریم!';e.target.reset()};
 </script>
